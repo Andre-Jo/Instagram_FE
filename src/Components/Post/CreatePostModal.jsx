@@ -4,18 +4,26 @@ import { FaPhotoVideo } from 'react-icons/fa'
 import './CreatePostModal.css'
 import { GrEmoji } from 'react-icons/gr'
 import { GoLocation } from 'react-icons/go'
+import { useDispatch } from 'react-redux'
+import { createPostAction } from '../../Redux/Post/Action'
+import { uploadToCloudnary } from '../../Config/UploadToCloudnary'
 
 const CreatePostModal = ({ onClose, isOpen }) => {
 
 	const [isDragOver, SetIsDragOver] = useState();
 	const [file, setFile] = useState();
 	const [caption, setCaption] = useState("");
+	const dispatch = useDispatch();
+	const [imageURL, setImageURL] = useState("");
+	const [location, setLocation] = useState("");
+	const token = localStorage.getItem("token");
 
 	const handleDragOver = (e) => {
 		e.preventDefault();
 		e.dataTransfer.dropEffect = "copy";
 		SetIsDragOver(true);
 	}
+
 	const handleDragLeave = () => {
 		SetIsDragOver(false);
 	}
@@ -28,9 +36,12 @@ const CreatePostModal = ({ onClose, isOpen }) => {
 		}
 	}
 
-	const handleOnChange = (e) => {
+	const handleOnChange = async (e) => {
 		const file = e.target.files[0];
 		if (file && (file.type.startsWith("image/") || file.type.startsWith("video/"))) {
+			const imgURL = await uploadToCloudnary(file)
+			setImageURL(imgURL);
+
 			setFile(file);
 			console.log("file : ", file);
 		} else {
@@ -43,6 +54,17 @@ const CreatePostModal = ({ onClose, isOpen }) => {
 		setCaption(e.target.value);
 	}
 
+	const handleCreatePost = () => {
+		const data = {
+			jwt: token,
+			data : {
+				caption,
+				image: imageURL,
+				location
+			}}
+		dispatch(createPostAction(data));
+	}
+
 	return (
 		<div>
 			<Modal size={"4xl"} onClose={onClose} isOpen={isOpen} isCentered>
@@ -50,7 +72,7 @@ const CreatePostModal = ({ onClose, isOpen }) => {
 				<ModalContent>
 					<div className='flex justify-between py-1 px-10 items-center'>
 						<p>Create New Post</p>
-						<Button className='' variant={"ghost"} size={'sm'} colorScheme={'blue'}>
+						<Button className='' variant={"ghost"} size={'sm'} colorScheme={'blue'} onClick={handleCreatePost}>
 							Share
 						</Button>
 					</div>
@@ -112,7 +134,7 @@ const CreatePostModal = ({ onClose, isOpen }) => {
 								<hr />
 
 								<div className='flex justify-between items-center p-2'>
-									<input className='locationInput' type="text" placeholder='location' name="location" />
+									<input onChange={(e)=>setLocation(e.target.value)} className='locationInput' type="text" placeholder='location' name="location" />
 									<GoLocation />
 								</div>
 								<hr />
