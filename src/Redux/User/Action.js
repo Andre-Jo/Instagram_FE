@@ -12,7 +12,7 @@ export const getUserProfileAction =  (jwt) => async(dispatch) => {
             }
         })
     
-        const reqUser = await res.json()
+        const reqUser = await res.json();
         dispatch({type: REQ_USER, payload: reqUser});
     } catch (error) {
         console.log("catch :", error);

@@ -63,6 +63,7 @@ const CreatePostModal = ({ onClose, isOpen }) => {
 				location
 			}}
 		dispatch(createPostAction(data));
+		onClose()
 	}
 
 	return (

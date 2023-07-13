@@ -27,9 +27,10 @@ export const SignIn = () => {
     }
 
     useEffect(() => {
-        if(jwt)
-        dispatch(getUserProfileAction(jwt))
-    },[jwt]);
+        if (jwt) {
+            dispatch(getUserProfileAction(jwt))
+        }
+    }, [jwt]);
 
     useEffect(() => {
         if (user.reqUser?.username) {

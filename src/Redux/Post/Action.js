@@ -9,7 +9,7 @@ export const createPostAction = (data) => async(dispatch) => {
             method:"POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorizaiton: "Bearer " + data.jwt
+                Authorization: "Bearer " + data.jwt
             },
             body: JSON.stringify(data.data),
         })
@@ -30,7 +30,7 @@ export const findUserPostAction = (data) => async(dispatch) => {
             method:"GET",
             headers: {
                 "Content-Type": "application/json",
-                Authorizaiton: "Bearer " + data.jwt
+                Authorization: "Bearer " + data.jwt
             },
         })
     
@@ -52,7 +52,7 @@ export const reqUserPostAction = (data) => async(dispatch) => {
             method:"GET",
             headers: {
                 "Content-Type": "application/json",
-                Authorizaiton: "Bearer " + data.jwt
+                Authorization: "Bearer " + data.jwt
             },
         })
     
@@ -74,7 +74,7 @@ export const likeUserPostAction = (data) => async(dispatch) => {
             method:"PUT",
             headers: {
                 "Content-Type": "application/json",
-                Authorizaiton: "Bearer " + data.jwt
+                Authorization: "Bearer " + data.jwt
             },
         })
     
@@ -96,7 +96,7 @@ export const unLikeUserPostAction = (data) => async(dispatch) => {
             method:"PUT",
             headers: {
                 "Content-Type": "application/json",
-                Authorizaiton: "Bearer " + data.jwt
+                Authorization: "Bearer " + data.jwt
             },
         })
     
@@ -118,7 +118,7 @@ export const saveUserPostAction = (data) => async(dispatch) => {
             method:"PUT",
             headers: {
                 "Content-Type": "application/json",
-                Authorizaiton: "Bearer " + data.jwt
+                Authorization: "Bearer " + data.jwt
             },
         })
     
@@ -140,7 +140,7 @@ export const unSaveUserPostAction = (data) => async(dispatch) => {
             method:"PUT",
             headers: {
                 "Content-Type": "application/json",
-                Authorizaiton: "Bearer " + data.jwt
+                Authorization: "Bearer " + data.jwt
             },
         })
     
@@ -162,7 +162,7 @@ export const findPostbyIdAction = (data) => async(dispatch) => {
             method:"GET",
             headers: {
                 "Content-Type": "application/json",
-                Authorizaiton: "Bearer " + data.jwt
+                Authorization: "Bearer " + data.jwt
             },
         })
     
@@ -184,7 +184,7 @@ export const deletePostAction = (data) => async(dispatch) => {
             method:"DELETE",
             headers: {
                 "Content-Type": "application/json",
-                Authorizaiton: "Bearer " + data.jwt
+                Authorization: "Bearer " + data.jwt
             },
         })
     

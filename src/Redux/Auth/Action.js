@@ -11,13 +11,13 @@ export const signinAction = (data) => async (dispatch) => {
             "Content-Type": "application/json",
             Authorization: "Basic " + btoa(data.email + ":" + data.password)
             },
-            mode: "cors",
-            credentials: "include"
+            // mode: "cors",
+            // credentials: "include"
         })
         
         const token = res.headers.get("Authorization");
         localStorage.setItem("token", token);
-        dispatch({ type: SIGN_IN, payload: token });        
+        dispatch({ type: SIGN_IN, payload: token });
         
     } catch (e) {
         console.log(e);
